@@ -1,4 +1,7 @@
+from urllib import request
 from django.shortcuts import render
+
+from morfi.models import Comentarios
 
 # Create your views here.
 
@@ -18,6 +21,7 @@ def desarroladores(self):
 
 def sugerinos(self):
 
-    print("recibimos el comentario")
+    if request.method == "POST":
+        nombre = Comentarios(nombre = request.POST["nombre"])
 
     return render(self, "sugerencias.html")
