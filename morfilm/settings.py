@@ -55,7 +55,7 @@ ROOT_URLCONF = 'morfilm.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["C:/Users/Level Up Pc/Desktop/TP_Final Python_CH/morfilm/templates"],
+        'DIRS': ["C:/TP_Final Python_CH/morfilm/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

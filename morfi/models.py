@@ -2,7 +2,7 @@ from email.mime import image
 from multiprocessing.pool import MapResult
 from operator import mod
 from django.db import models
-from django.forms import ImageField
+from django.forms import EmailField, ImageField
 
 # Create your models here.
 
@@ -16,7 +16,9 @@ class Usuario(models.Model):
 
 class Comentarios(models.Model):
 
-    titulo = models.CharField( max_length=50)
+    nombre = models.CharField( max_length=50)
+    email = models.EmailField(max_length=254)
+    asunto = models.CharField(max_length=50)
     comentario = models.CharField(max_length=1000)
 
 class Cargar_pelicula(models.Model):
