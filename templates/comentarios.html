@@ -1,0 +1,25 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+    
+<!-- Form de pelis-->
+        <!-- Contact-->
+        <section class="page-section bg-dark" id="contact">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-muted">Dejanos tu sugerencia</h2>
+                    <h3 class="section-subheading text-muted">Comentanos lo que quieras. Ayudanos a ayudarte a que seamos mejores para vos.</h3>
+                </div>
+                <form class="page-section bg-light" action="{% url 'comentarios' %}" method="POST">{% csrf_token %}
+                   
+                    {{miFormulario.as_p}}
+
+                    <!-- Submit Button-->
+                    <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase" type="submit">Enviar mensaje</button></div>
+                </form>
+            </div>
+        </section>
+
+{% endblock contenidoQueCambia %}

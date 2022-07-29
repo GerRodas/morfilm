@@ -1,7 +1,10 @@
-from urllib import request
+
+from django.http import HttpResponse
 from django.shortcuts import render
 
 from morfi.models import Comentarios
+from morfi.forms import ComentariosFormulario
+from morfi.models import Comida
 
 # Create your views here.
 
@@ -19,9 +22,47 @@ def algunaspelis(self):
 def desarroladores(self):
     return render(self, "hayequipo.html")
 
-def sugerinos(self):
+def comentarios(request):
 
     if request.method == "POST":
-        nombre = Comentarios(nombre = request.POST["nombre"])
 
-    return render(self, "sugerencias.html")
+        miFormulario = ComentariosFormulario(request.POST)
+
+        if miFormulario.is_valid():
+
+            data = miFormulario.cleaned_data
+
+            comments = Comentarios(nombre=data['nombre'], email=data['email'], asunto=data['asunto'], comentario=data['comentario'],)
+
+            comments.save()
+
+            return render(request, 'inicio.html')
+
+    else:
+
+        miFormulario = ComentariosFormulario()
+    
+    return render(request, "comentarios.html", {"miFormulario": miFormulario})
+
+
+def busquedaComida(request):
+
+    return render(request, 'busquedaComida.html')
+
+
+def buscarComida(request):
+ 
+
+    if request.GET["camada"]:
+
+        comida = request.GET["nombreComida"]
+
+        pelicula = Comida(comida__icontains=comida)
+
+        return render(request, "resultadoBusqueda.html", {"nombreComida": comida, "peli": pelicula})
+
+    else:
+
+        respuesta = "No enviaste datos"
+
+    return HttpResponse(respuesta)
