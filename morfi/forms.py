@@ -5,3 +5,5 @@ class ComentariosFormulario(forms.Form):
     email = forms.EmailField()
     asunto = forms.CharField(max_length=30)
     comentario = forms.CharField(max_length=1000)
+
+

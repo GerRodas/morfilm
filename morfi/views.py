@@ -50,10 +50,10 @@ def busquedaComida(request):
     return render(request, 'busquedaComida.html')
 
 
-def buscarComida(request):
+def resultadoComida(request):
  
 
-    if request.GET["camada"]:
+    if request.GET["nombreComida"]:
 
         comida = request.GET["nombreComida"]
 

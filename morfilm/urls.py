@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from morfi.views import algunaspelis, comofunciona, desarroladores, inicio, comentarios, busquedaComida
+from morfi.views import algunaspelis, comofunciona, desarroladores, inicio, comentarios, busquedaComida, resultadoComida
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +26,6 @@ urlpatterns = [
     path('algunaspelis.html', algunaspelis),
     path('hayequipo.html', desarroladores),
     path('comentarios.html', comentarios, name="comentarios"),
-    path('busquedaComida.html', busquedaComida, name="busqueda"),
+    path('busquedaComida.html', busquedaComida, name="buscar"),
+    path('resultadoBusqueda.html',resultadoComida, name="resultado"),
 ]
