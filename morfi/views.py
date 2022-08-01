@@ -2,9 +2,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from morfi.models import Comentarios
-from morfi.forms import ComentariosFormulario
-from morfi.models import Comida
+from morfi.models import Comentarios, Cargar_pelicula, Comida
+from morfi.forms import ComentariosFormulario, ComidaFormulario
 
 # Create your views here.
 
@@ -50,16 +49,39 @@ def busquedaComida(request):
     return render(request, 'busquedaComida.html')
 
 
-def resultadoComida(request):
- 
+
+def cargarComida(request):
+
+    if request.method == "POST":
+
+        miComida = ComidaFormulario(request.POST)
+
+        if miComida.is_valid():
+
+            data = miComida.cleaned_data
+
+            food = Cargar_pelicula(nombre_film=data['pelicula_involucrada'], comidas_involucradas=data['nombre_comida'])
+
+            food.save()
+
+            return render(request, 'inicio.html')
+    else:
+
+        miComida = ComidaFormulario()
+    
+    return render(request, "cargarComida.html", {"miComida": miComida})
+
+
+
+def resultadoBusqueda(request):
 
     if request.GET["nombreComida"]:
 
         comida = request.GET["nombreComida"]
 
-        pelicula = Comida(comida__icontains=comida)
+        pelicula = Cargar_pelicula.objects.filter(comidas_involucradas__icontains=comida)
 
-        return render(request, "resultadoBusqueda.html", {"nombreComida": comida, "peli": pelicula})
+        return render(request, "resultadoBusqueda.html", {"nombreComida": comida, "nombre_film": pelicula})
 
     else:
 

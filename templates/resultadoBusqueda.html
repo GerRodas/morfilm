@@ -9,15 +9,31 @@
         <section class="page-section bg-dark" id="contact">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-muted">Dejanos tu sugerencia</h2>
-                    <h3 class="section-subheading text-muted">Comentanos lo que quieras. Ayudanos a ayudarte a que seamos mejores para vos.</h3>
-                </div>
-                <form class="page-section bg-light" action="{% url 'Buscar' %}" method="GET">{% csrf_token %}
-                   
-                        <p>Nombre de la Comida: <input type="text" name="nombreComida"></p>
+                    <h2 class="section-heading text-muted">Elegiste buscar por {{nombreComida}}</h2>
+                    <h3 class="section-subheading text-muted">Este fue el resultado</h3>
+                </div class="section-subheading text-muted"> 
+
                 
-                    <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase" type="submit">Buscar</button></div>
-                </form>
+                
+                    {% if pelicula %}
+
+                <ul>
+        
+                    {% for peliculas in pelicula %}
+                        <li>
+                            {{pelicula.nombreComida}}-{{pelicula.pelicula}}
+                        </li>
+                    {% endfor %}
+                        
+                </ul>
+                
+                {% else %}
+        
+                    <p>¡No hubo coincidencias!</p>
+                
+                {% endif %}
+                </div>    
+            
             </div>
         </section>
 
