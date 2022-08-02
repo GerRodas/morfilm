@@ -9,36 +9,24 @@
         <section class="page-section bg-dark">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-muted">Elegiste buscar por {{nombreComida}}</h2>
-                    <h3 class="section-subheading text-muted">Este fue el resultado</h3>
+                    <h2 class="section-heading text-muted">Estos son algunos de los comenterios de los usuarios</h2>
+                    <h3 class="section-subheading text-muted">Suma el tuyo y que aprezca aqui</h3>
                 </div> 
                     <div class="section-subheading text-muted">
 
-                        {% if nombre_film %}
-
-                <ul>
+                    <ul>
         
-                    {% for pelicula in nombre_film %}
+                    {% for comment in nombre %}
                         <li>
-                            {{nombreComida}} - {{pelicula.nombre_film}}
+                            {{nombre}} - {{comment.comentario}}
                         </li>
                     {% endfor %}
                         
-                </ul>
+                    </ul>
                 
-                {% else %}
-        
-                    <p>¡No hubo coincidencias!</p>
-                
-                {% endif %}
-
-
-
-
-
+                           
                     </div>
-                
-                
+                        
                 
                 </div>    
             

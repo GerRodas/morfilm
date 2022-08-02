@@ -35,13 +35,17 @@ def comentarios(request):
 
             comments.save()
 
-            return render(request, 'inicio.html')
+            return render(request, 'graciasComentarios.html')
 
     else:
 
         miFormulario = ComentariosFormulario()
     
     return render(request, "comentarios.html", {"miFormulario": miFormulario})
+
+def graciasComentario(request):
+
+    return render(request, 'graciasComentarios.html')
 
 
 def busquedaComida(request):
@@ -64,14 +68,16 @@ def cargarComida(request):
 
             food.save()
 
-            return render(request, 'inicio.html')
+            return render(request, 'graciasCargaFilm.html')
     else:
 
         miComida = ComidaFormulario()
     
     return render(request, "cargarComida.html", {"miComida": miComida})
 
+def graciasCargaComida(request):
 
+    return render(request, 'graciasCargaFilm.html')
 
 def resultadoBusqueda(request):
 
@@ -88,3 +94,23 @@ def resultadoBusqueda(request):
         respuesta = "No enviaste datos"
 
     return HttpResponse(respuesta)
+
+
+def foro(request):
+
+    if request.GET:
+        
+        nombre, comentario = Comentarios.objects.all
+
+        return render(request, "foro.html", {"nombre": nombre, "comentario": comentario})
+
+    else:
+
+        respuesta = "No enviaste datos"
+
+    return HttpResponse(respuesta)
+
+
+def enDesarrollo(request):
+
+    return render(request, 'enDesarrollo.html')

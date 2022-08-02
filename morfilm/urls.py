@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 
 from morfi.views import algunaspelis, comofunciona, desarroladores, inicio, comentarios, busquedaComida, resultadoBusqueda, cargarComida
+from morfi.views import graciasCargaComida, graciasComentario, foro, enDesarrollo
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,7 +28,11 @@ urlpatterns = [
     path('algunaspelis.html', algunaspelis),
     path('hayequipo.html', desarroladores),
     path('comentarios.html', comentarios, name="comentarios"),
+    path('graciasporsumar.html', graciasComentario),
     path('busquedaComida.html', busquedaComida, name="buscar"),
     path('resultadoBusqueda.html',resultadoBusqueda, name="resultado"),
-    path('cargarComida.html',cargarComida, name="cargarComida"),
+    path('cargarComida.html', cargarComida, name="cargarComida"),
+    path('graciasCargaFilm.html', graciasCargaComida),
+    path('foro.html', foro),
+    path('enDesarrollo.html',enDesarrollo),
 ]
