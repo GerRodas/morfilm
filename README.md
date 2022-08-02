@@ -1,4 +1,5 @@
 # morfilm
+<<<<<<< HEAD
 
 TP Final de Python y Django PAGINA MORFILM
 
@@ -28,3 +29,13 @@ En la barra inferior (footer), se encuentra un botón que dice "NOSOTROS" Allí 
 
 
 Los planes a futuro incluirían generar usuarios para que puedan loguearse para poder cargar datos por usuario, implementar la sección de comentarios, foros, etc. Mostrar imágenes de las pelis, en el momento que estan comiendo lo que se dice con la hora y minuto en la que lo estan comiendo.
+=======
+TP Final de Python y Django
+PAGINA MORFILM
+- Por medio de un buscador el usuario debe elejir la comida de su preferencia
+- El funcionamiento de la pagina consiste en elejir la comida de una pelicula según el gusto del usuario
+- SE puede ver la pelicula donde sale esa comida que quiere el usuario y en que minuto en especifico de la
+pelicula sale la comida elejida por el usuario.
+- El usuario, por medio de la sección de comentarios el usuario podrá crear foros, dejar su experiencia 
+escrita que vivió en la pagina y todo lo que cocierne a su experiencia en cuanto a la pagina.
+>>>>>>> bfd03393fbd01205f2125f2b11375d04c474e204
