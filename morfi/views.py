@@ -5,6 +5,14 @@ from django.shortcuts import render
 from morfi.models import Comentarios, Cargar_pelicula, Comida
 from morfi.forms import ComentariosFormulario, ComidaFormulario
 
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import authenticate,login,logout
+
+from django.contrib.auth.decorators import login_required
+
+from django.contrib.admin.views.decorators import staff_member_required
+
+
 # Create your views here.
 
 
@@ -21,6 +29,7 @@ def algunaspelis(self):
 def desarroladores(self):
     return render(self, "hayequipo.html")
 
+@login_required
 def comentarios(request):
 
     if request.method == "POST":
@@ -53,7 +62,7 @@ def busquedaComida(request):
     return render(request, 'busquedaComida.html')
 
 
-
+@staff_member_required(login_url="solostaff")
 def cargarComida(request):
 
     if request.method == "POST":
@@ -114,3 +123,68 @@ def foro(request):
 def enDesarrollo(request):
 
     return render(request, 'enDesarrollo.html')
+
+
+#DOMINGO 7/8 DIEGO LOGIN, LOGOUT, REGISTRO
+
+def loginView(request):
+
+    if request.method == "POST":
+
+        miFormulario = AuthenticationForm(request, data=request.POST)
+
+        if miFormulario.is_valid():
+
+            data = miFormulario.cleaned_data
+
+            usuario = data["username"]
+            psw = data["password"]
+
+            user = authenticate(username=usuario, password=psw)
+
+            if user:
+
+                login(request, user)
+
+                return render(request, "loginfalse.html", {"mensaje": f"Bienvendido {usuario}"})
+
+            else:
+
+                return render (request, "loginfalse.html", {"mensaje": "Error, datos incorrectos"})
+        
+        return render (request, "loginfalse.html", {"mensaje": "Error, datos incorrectos"})
+        
+    else:
+
+        miFormulario = AuthenticationForm()
+
+    return render(request, "login.html", {"miFormulario": miFormulario})
+
+
+
+
+def register(request):
+
+    if request.method == "POST":
+
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+
+            username = form.cleaned_data["username"]
+
+            form.save()
+
+            return render(request, "loginfalse.html", {"mensaje": f"Usuario {username} creado"})
+    
+    else:
+
+        form = UserCreationForm()
+
+    return render(request, "registro.html", {"miFormulario": form})
+
+
+
+
+def solo_staff(self):
+    return render(self, "solostaff.html")
