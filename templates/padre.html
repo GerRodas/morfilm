@@ -36,6 +36,13 @@
                         <li class="nav-item"><a class="nav-link" href="cargarComida.html">Cargar comida</a></li>
                         <li class="nav-item"><a class="nav-link" href="comentarios.html">Comentarios</a></li>
                         <li class="nav-item"><a class="nav-link" href="enDesarrollo.html">Lo que se dice...</a></li>
+                        <li class="nav-item"><a class="nav-link" href="registrar">Regístrate</a></li>
+
+                        {% if user.is_authenticated %}
+                            <a class="btn btn-primary" href="{% url 'logout' %}">LOGOUT</a>
+                        {% else %}
+                            <a class="btn btn-primary" href="{% url 'login' %}">LOGIN</a>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
