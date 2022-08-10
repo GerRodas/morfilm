@@ -20,7 +20,7 @@
         
                     {% for pelicula in nombre_film %}
                         <li>
-                            {{nombreComida}} - {{pelicula.nombre_film}}
+                            <h3>{{nombreComida}} - {{pelicula.nombre_film}}</h3>
                         </li>
                     {% endfor %}
                         
@@ -28,7 +28,7 @@
                 
                 {% else %}
         
-                    <p>¡No hubo coincidencias!</p>
+                    <h3>¡No hubo coincidencias!</h3>
                 
                 {% endif %}
 
