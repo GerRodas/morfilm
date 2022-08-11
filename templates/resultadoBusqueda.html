@@ -14,10 +14,10 @@
                 </div> 
                     <div class="section-subheading text-muted">
 
-                        {% if nombre_film %}
+                    {% if nombre_film %}
 
                 <ul>
-        
+                            
                     {% for pelicula in nombre_film %}
                         <li>
                             <h3>{{nombreComida}} - {{pelicula.nombre_film}}</h3>
@@ -26,20 +26,13 @@
                         
                 </ul>
                 
-                {% else %}
+                    {% else %}
         
-                    <h3>¡No hubo coincidencias!</h3>
+                        <h3>¡No hubo coincidencias!</h3>
                 
-                {% endif %}
+                    {% endif %}
 
-
-
-
-
-                    </div>
-                
-                
-                
+                </div>              
                 </div>    
             
             </div>

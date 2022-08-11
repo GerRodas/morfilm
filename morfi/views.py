@@ -96,7 +96,7 @@ def resultadoBusqueda(request):
 
         pelicula = Cargar_pelicula.objects.filter(comidas_involucradas__icontains=comida)
 
-        return render(request, "resultadoBusqueda.html", {"nombreComida": comida, "nombre_film": pelicula})
+        return render(request, "resultadoBusquedaPro.html", {"nombreComida": comida, "nombre_film": pelicula})
 
     else:
 
@@ -115,7 +115,7 @@ def foro(request):
 
     else:
 
-        respuesta = "No enviaste datos"
+        respuesta = "No hay comentarios para mostrar"
 
     return HttpResponse(respuesta)
 

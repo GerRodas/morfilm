@@ -1,0 +1,54 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+    
+<!-- Form de pelis-->
+        <!-- Contact-->
+        <section class="page-section bg-dark">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-muted">Elegiste buscar por {{nombreComida}}</h2>
+                    <h3 class="section-subheading text-muted">Este fue el resultado</h3>
+                </div> 
+                    <div class="section-subheading text-muted">
+
+                {% if nombre_film %}
+
+                {% for pelicula in nombre_film %}
+                <section class="page-section bg-dark" id="portfolio">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4 col-sm-6 mb-4">
+                                <!-- Portfolio item 1-->
+                                <div class="portfolio-item">
+                                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
+                                        <!-- Popup que podemos usar para poner más datos, da un link al apretar-->
+                                        <div class="portfolio-hover">
+                                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                        </div>
+                                        <img class="img-fluid" src="static/assets/img/portfolio/1.jpg" alt="..." />
+                                    </a>
+                                    <div class="portfolio-caption">
+                                        <div class="portfolio-caption-heading">En {{pelicula.nombre_film}}({{anio_film}}), comen {{nombreComida}} en el tiempo{{time}}</div>
+                                        <div class="portfolio-caption-subheading text-muted" style="text-align:right;">Peli cargada por {{usuario}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                    {% endfor %}
+                    {% else %}
+        
+                        <h3>¡No hubo coincidencias!</h3>
+                
+                    {% endif %}
+                </div>              
+                </div>    
+            
+            </div>
+        </section>
+
+{% endblock contenidoQueCambia %}

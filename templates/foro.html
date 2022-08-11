@@ -14,18 +14,22 @@
                 </div> 
                     <div class="section-subheading text-muted">
 
-                    <ul>
-        
-                    {% for comment in nombre %}
-                        <li>
-                            {{nombre}} - {{comment.comentario}}
-                        </li>
-                    {% endfor %}
+                        <hr>
+
+                        <div data-gb-custom-block data-tag="for"></div>
                         
-                    </ul>
-                
-                           
-                    </div>
+                            <div class="Comentarios">
+                                <div class="date">{{ comment.created_date }}</div>
+                                <strong>{{ <comment class="nombre"></comment> }}</strong>
+                                <p>{{ comment.text|linebreaks }}</p>
+                            </div>
+                        
+                        <div data-gb-custom-block data-tag="empty">
+                        
+                            <p>No comments here yet :(</p>
+                        
+                        </div>
+
                         
                 
                 </div>    
