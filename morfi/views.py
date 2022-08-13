@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from morfi.models import Comentarios, Cargar_pelicula, Comida
+from morfi.models import Comentarios, Cargar_pelicula
 from morfi.forms import ComentariosFormulario, ComidaFormulario
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -29,7 +29,7 @@ def algunaspelis(self):
 def desarroladores(self):
     return render(self, "hayequipo.html")
 
-@login_required
+#@login_required
 def comentarios(request):
 
     if request.method == "POST":
@@ -40,7 +40,12 @@ def comentarios(request):
 
             data = miFormulario.cleaned_data
 
-            comments = Comentarios(nombre=data['nombre'], email=data['email'], asunto=data['asunto'], comentario=data['comentario'],)
+            comments = Comentarios(
+                nombre=data['nombre'], 
+                email=data['email'], 
+                asunto=data['asunto'], 
+                comentario=data['comentario']
+                )
 
             comments.save()
 
@@ -76,11 +81,11 @@ def cargarComida(request):
             food = Cargar_pelicula(
                 nombre_film=data['pelicula_involucrada'],
                 comidas_involucradas=data['nombre_comida'],
-                anio_film=data['anio_peli'],
-                imagen_film=data['imagen_peli'],
-                imagen_comida=data['imagen_morfi'],
-                descripcion_film=data['descripcion_peli'],
-                tiempo_comen_film=data['tiempo_mofan'],
+                anio_film=data['anio_film'],
+                #imagen_film=data['imagen_film'],
+                #imagen_comida=data['imagen_comida'],
+                descripcion_film=data['descripcion_film'],
+                tiempo_comen_film=data['tiempo_comen_film'],
                 )
 
             food.save()
