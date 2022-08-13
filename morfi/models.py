@@ -35,6 +35,11 @@ class Cargar_pelicula(models.Model):
 
     nombre_film = models.CharField(max_length=50)
     comidas_involucradas = models.CharField(max_length=50)
+    anio_film = models.IntegerField()
+    imagen_film = models.ImageField()
+    imagen_comida = models.ImageField()
+    descripcion_film = models.CharField(max_length=300)
+    tiempo_comen_film = models.TimeField()
 
     #AGREGAR IMAGEN DE LA PELI INVOLUCRADA DONDE COMEN ESO (LA IMAGEN EXACTA SERÍA GENIAL)
     #OTROS OBJETOS USABLES SERÍAN: AÑO FILM, TIEMPO DONDE COMEN ESO, GENERO DE LA PELICULA

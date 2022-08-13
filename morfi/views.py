@@ -62,7 +62,7 @@ def busquedaComida(request):
     return render(request, 'busquedaComida.html')
 
 
-@staff_member_required(login_url="solostaff")
+#@staff_member_required(login_url="solostaff")
 def cargarComida(request):
 
     if request.method == "POST":
@@ -73,7 +73,15 @@ def cargarComida(request):
 
             data = miComida.cleaned_data
 
-            food = Cargar_pelicula(nombre_film=data['pelicula_involucrada'], comidas_involucradas=data['nombre_comida'])
+            food = Cargar_pelicula(
+                nombre_film=data['pelicula_involucrada'],
+                comidas_involucradas=data['nombre_comida'],
+                anio_film=data['anio_peli'],
+                imagen_film=data['imagen_peli'],
+                imagen_comida=data['imagen_morfi'],
+                descripcion_film=data['descripcion_peli'],
+                tiempo_comen_film=data['tiempo_mofan'],
+                )
 
             food.save()
 
@@ -96,7 +104,26 @@ def resultadoBusqueda(request):
 
         pelicula = Cargar_pelicula.objects.filter(comidas_involucradas__icontains=comida)
 
-        return render(request, "resultadoBusquedaPro.html", {"nombreComida": comida, "nombre_film": pelicula})
+        anio_peli = Cargar_pelicula.objects.filter(anio_film__icontains=comida)
+
+        imagen_peli = Cargar_pelicula.objects.filter(imagen_film__icontains=comida)
+
+        imagen_morfi= Cargar_pelicula.objects.filter(imagen_comida__icontains=comida)
+
+        descripcion = Cargar_pelicula.objects.filter(descripcion_film__icontains=comida)
+        
+        tiempo_comen = Cargar_pelicula.objects.filter(tiempo_comen_film__icontains=comida)
+
+        return render(request, "resultadoBusquedaPro.html", {
+            "nombreComida": comida, 
+            "nombre_film": pelicula,
+            "anio_film": anio_peli,
+            "imagen_film": imagen_peli,
+            "descripcion_film": descripcion,
+            "imagen_comida": imagen_morfi,
+            "tiempo_morfan": tiempo_comen
+            }
+            )
 
     else:
 
