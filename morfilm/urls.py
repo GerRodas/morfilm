@@ -16,6 +16,8 @@ Including another URLconf
 from atexit import register
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 from morfi.views import algunaspelis, comofunciona, desarroladores, inicio, comentarios, busquedaComida, loginView, resultadoBusqueda, cargarComida, register, solo_staff
 from morfi.views import graciasCargaComida, graciasComentario, foro, enDesarrollo
@@ -43,3 +45,5 @@ urlpatterns = [
     path("solostaff", solo_staff, name= "solostaff")
     
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

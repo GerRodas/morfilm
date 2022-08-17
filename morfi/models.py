@@ -36,8 +36,8 @@ class Cargar_pelicula(models.Model):
     nombre_film = models.CharField(max_length=50)
     comidas_involucradas = models.CharField(max_length=50)
     anio_film = models.IntegerField()
-    imagen_film = models.ImageField()
-    imagen_comida = models.ImageField()
+    imagen_film = models.ImageField(upload_to="image_films", null=True, blank=True)
+    imagen_comida = models.ImageField(upload_to="image_foods", null=True, blank=True)
     descripcion_film = models.CharField(max_length=300)
     tiempo_comen_film = models.TimeField()
 
@@ -46,7 +46,7 @@ class Cargar_pelicula(models.Model):
     
 
     def __str__(self):
-        return f"{self.nombre_film} - {self.comidas_involucradas}"
+        return f"{self.nombre_film} - {self.comidas_involucradas} - {self.anio_film} - {self.imagen_film} - {self.imagen_comida} - {self.descripcion_film} - {self.tiempo_comen_film}"
 
 class Comida(models.Model):
 

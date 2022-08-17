@@ -72,7 +72,7 @@ def cargarComida(request):
 
     if request.method == "POST":
 
-        miComida = ComidaFormulario(request.POST)
+        miComida = ComidaFormulario(request.POST, request.FILES)
 
         if miComida.is_valid():
 
@@ -82,8 +82,8 @@ def cargarComida(request):
                 nombre_film=data['pelicula_involucrada'],
                 comidas_involucradas=data['nombre_comida'],
                 anio_film=data['anio_film'],
-                #imagen_film=data['imagen_film'],
-                #imagen_comida=data['imagen_comida'],
+                imagen_film=data['imagen_film'],
+                imagen_comida=data['imagen_comida'],
                 descripcion_film=data['descripcion_film'],
                 tiempo_comen_film=data['tiempo_comen_film'],
                 )
@@ -111,9 +111,9 @@ def resultadoBusqueda(request):
 
         anio_peli = Cargar_pelicula.objects.filter(anio_film__icontains=comida)
 
-        imagen_peli = Cargar_pelicula.objects.filter(imagen_film__icontains=comida)
+        imagen_peli = Cargar_pelicula.objects.get(imagen_film__icontains=comida)
 
-        imagen_morfi= Cargar_pelicula.objects.filter(imagen_comida__icontains=comida)
+        imagen_morfi= Cargar_pelicula.objects.get(imagen_comida__icontains=comida)
 
         descripcion = Cargar_pelicula.objects.filter(descripcion_film__icontains=comida)
         
@@ -123,9 +123,9 @@ def resultadoBusqueda(request):
             "nombreComida": comida, 
             "nombre_film": pelicula,
             "anio_film": anio_peli,
-            "imagen_film": imagen_peli,
+            "imagen_film": imagen_peli.imagen_film.url,
             "descripcion_film": descripcion,
-            "imagen_comida": imagen_morfi,
+            "imagen_comida": imagen_morfi.imagen_comida.url,
             "tiempo_morfan": tiempo_comen
             }
             )

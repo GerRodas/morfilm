@@ -28,10 +28,10 @@
                                         <div class="portfolio-hover">
                                             <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                         </div>
-                                        <img class="img-fluid" src="static/assets/img/portfolio/1.jpg" alt="..." />
+                                        <img class="img-fluid" src="{{pelicula.imagen_film.url}}" alt="..." />
                                     </a>
                                     <div class="portfolio-caption">
-                                        <div class="portfolio-caption-heading">En {{pelicula.nombre_film}}({{anio_film}}), comen {{nombreComida}} en el tiempo{{time}}</div>
+                                        <div class="portfolio-caption-heading">En {{pelicula.nombre_film}}({{pelicula.anio_film}}), comen {{nombreComida}} en el tiempo{{pelicula.tiempo_morfan}}</div>
                                         <div class="portfolio-caption-subheading text-muted" style="text-align:right;">Peli cargada por {{usuario}}</div>
                                     </div>
                                 </div>
