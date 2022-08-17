@@ -14,13 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from atexit import register
+from xml.dom.minidom import Document
 from django.contrib import admin
 from django.urls import path
 
-from morfi.views import algunaspelis, comofunciona, desarroladores, inicio, comentarios, busquedaComida, loginView, resultadoBusqueda, cargarComida, register, solo_staff
+from morfi.views import algunaspelis, comofunciona, desarroladores, inicio, comentarios, busquedaComida, loginView, resultadoBusqueda, cargarComida, register, solo_staff, editar_perfil, agregar_avatar
 from morfi.views import graciasCargaComida, graciasComentario, foro, enDesarrollo
 
 from django.contrib.auth.views import LogoutView
+
+# 13-08
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,6 +45,12 @@ urlpatterns = [
     path("login", loginView, name="login"),
     path("registrar", register, name="registrar"),
     path("logout", LogoutView.as_view(template_name="logout.html"), name="logout"),
-    path("solostaff", solo_staff, name= "solostaff")
+    path("solostaff", solo_staff, name= "solostaff"),
+    path("editarperfil", editar_perfil, name="EditarPerfil"),
+    path("avatar", agregar_avatar, name="avatar")
+
     
 ]
+
+#13-08
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

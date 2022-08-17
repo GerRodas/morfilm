@@ -1,5 +1,5 @@
 from django.contrib import admin
-from morfi.models import Usuario, Comentarios, Cargar_pelicula, Comida
+from morfi.models import Avatar, Usuario, Comentarios, Cargar_pelicula, Comida
 # Register your models here.
 
 class Usuarioadmin(admin.ModelAdmin):
@@ -22,3 +22,4 @@ admin.site.register(Usuario, Usuarioadmin)
 admin.site.register(Comentarios, Comentariosadmin)
 admin.site.register(Cargar_pelicula, Cargar_peliculaadmin)
 admin.site.register(Comida, Comidaadmin)
+admin.site.register(Avatar)

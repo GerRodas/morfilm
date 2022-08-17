@@ -1,25 +1,35 @@
 
+from re import A
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from morfi.models import Comentarios, Cargar_pelicula, Comida
-from morfi.forms import ComentariosFormulario, ComidaFormulario
+from morfi.models import Avatar, Comentarios, Cargar_pelicula, Comida
+from morfi.forms import ComentariosFormulario, ComidaFormulario, UserEditform, AvatarFormulario
 
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.contrib.auth import authenticate,login,logout
 
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.admin.views.decorators import staff_member_required
 
+from django.contrib.auth.models import User
+
 
 # Create your views here.
 
 
 
-def inicio(self):
-    return render(self, "inicio.html")
+def inicio(request):
 
+    try:
+       avatar = Avatar.objects.get(user=request.user.id)
+       return render(request, "inicio.html", {"url": avatar.imagen.url})
+
+    except:
+        return render(request, "inicio.html")
+
+    
 def comofunciona(self):
     return render(self, "comofunciona.html")
 
@@ -188,3 +198,58 @@ def register(request):
 
 def solo_staff(self):
     return render(self, "solostaff.html")
+
+
+#DIEGO  13-08
+@login_required
+def editar_perfil(request):
+
+    usuario = request.user
+
+    if request.method == "POST":
+        
+        miFormulario = UserEditform(request.POST, instance=request.user)
+
+        if miFormulario.is_valid():
+
+            data = miFormulario.cleaned_data
+
+            usuario.first_name = data["first_name"]
+            usuario.last_name = data["last_name"]
+            usuario.email = data["email"]
+
+            usuario.save()
+#HACER TEMPLATE QUE INFORME DATOS INGRESADOS CORRECTAMENTE
+            return render(request, "editarperfilok.html")
+
+    else:
+
+        miFormulario = UserEditform(instance=request.user)
+
+    return render(request, "editarPerfil.html", {"miFormulario": miFormulario})
+
+
+
+@login_required
+def agregar_avatar(request):
+
+    if request.method == "POST":
+        
+        miFormulario = AvatarFormulario(request.POST, request.FILES)
+
+        if miFormulario.is_valid():
+            #esta parte la arme como la filminas
+            u = User.objects.get(username=request.user)
+            avatar = Avatar(user=u, imagen=miFormulario.cleaned_data["imagen"])
+
+            #avatar = Avatar(user=request.user, imagen=data['imagen'])
+
+            avatar.save()
+
+        return render(request, "inicio.html")
+
+    else:
+
+        miFormulario = AvatarFormulario()
+
+    return render(request, "agregarAvatar.html", {"miFormulario": miFormulario})

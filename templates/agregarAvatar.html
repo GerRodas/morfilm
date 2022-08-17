@@ -1,0 +1,26 @@
+{% extends 'padre.html' %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+    
+
+        <!-- Contact-->
+        <section class="page-section bg-dark" id="contact">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-muted">Página de selección de ávatar</h2>
+                </div>
+                <form method="POST" enctype="multipart/form-data">
+                    
+                    {% csrf_token %}
+
+                    {{miFormulario.as_p}}
+
+                    <input type="submit" value="Cargar">
+                
+                </form>
+            </div>
+        </section>
+
+{% endblock contenidoQueCambia %}
